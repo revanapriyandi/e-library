@@ -24,10 +24,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'telpon' => ['required', 'max:20'],
-            'alamat' => ['required'],
-            'address' => ['required'],
-            'kecamatan' => ['required'],
-            'kabupaten' => ['required'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {

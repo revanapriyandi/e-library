@@ -21,9 +21,12 @@ Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/user/profile', [UserProfileController::class, 'show'])
-    ->name('profile.show');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/user/profile/update-password', App\Http\Livewire\Profile\UpdatePasswordInformation::class)->name('profile.update-password');
-Route::get('/user/profile/update-profile', App\Http\Livewire\Profile\UpdateProfileInformation::class)->name('profile.update-profile');
-Route::get('/user/profile/update-lainnya', App\Http\Livewire\Profile\UpdateInformationLainnya::class)->name('profile.update-lainnya');
+    Route::get('/user/profile', [UserProfileController::class, 'show'])
+        ->name('profile.show');
+
+    Route::get('/user/profile/update-password', App\Http\Livewire\Profile\UpdatePasswordInformation::class)->name('profile.update-password');
+    Route::get('/user/profile/update-profile', App\Http\Livewire\Profile\UpdateProfileInformation::class)->name('profile.update-profile');
+    Route::get('/user/profile/update-lainnya', App\Http\Livewire\Profile\UpdateInformationLainnya::class)->name('profile.update-lainnya');
+});

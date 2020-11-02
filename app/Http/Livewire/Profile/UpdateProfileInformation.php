@@ -38,7 +38,7 @@ class UpdateProfileInformation extends Component
         );
 
         if (isset($this->photo)) {
-            return redirect()->route('profile.show');
+            return redirect()->route('profile.update-profile');
         }
 
         $this->emit('saved');

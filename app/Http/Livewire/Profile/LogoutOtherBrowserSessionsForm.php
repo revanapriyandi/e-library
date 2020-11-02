@@ -13,40 +13,9 @@ use Illuminate\Validation\ValidationException;
 
 class LogoutOtherBrowserSessionsForm extends Component
 {
-    /**
-     * Indicates if logout is being confirmed.
-     *
-     * @var bool
-     */
-    public $confirmingLogout = false;
 
-    /**
-     * The user's current password.
-     *
-     * @var string
-     */
     public $password = '';
 
-    /**
-     * Confirm that the user would like to logout from other browser sessions.
-     *
-     * @return void
-     */
-    public function confirmLogout()
-    {
-        $this->password = '';
-
-        $this->dispatchBrowserEvent('confirming-logout-other-browser-sessions');
-
-        $this->confirmingLogout = true;
-    }
-
-    /**
-     * Logout from other browser sessions.
-     *
-     * @param  \Laravel\Jetstream\Contracts\DeletesUsers  $deleter
-     * @return void
-     */
     public function logoutOtherBrowserSessions(StatefulGuard $guard)
     {
         $this->resetErrorBag();
@@ -61,16 +30,10 @@ class LogoutOtherBrowserSessionsForm extends Component
 
         $this->deleteOtherSessionRecords();
 
-        $this->confirmingLogout = false;
-
         $this->emit('loggedOut');
     }
 
-    /**
-     * Delete the other browser session records from storage.
-     *
-     * @return void
-     */
+
     protected function deleteOtherSessionRecords()
     {
         if (config('session.driver') !== 'database') {
@@ -83,11 +46,7 @@ class LogoutOtherBrowserSessionsForm extends Component
             ->delete();
     }
 
-    /**
-     * Get the current sessions.
-     *
-     * @return \Illuminate\Support\Collection
-     */
+
     public function getSessionsProperty()
     {
         if (config('session.driver') !== 'database') {
@@ -109,12 +68,6 @@ class LogoutOtherBrowserSessionsForm extends Component
         });
     }
 
-    /**
-     * Create a new agent instance from the given session.
-     *
-     * @param  mixed  $session
-     * @return \Jenssegers\Agent\Agent
-     */
     protected function createAgent($session)
     {
         return tap(new Agent, function ($agent) use ($session) {
@@ -122,11 +75,6 @@ class LogoutOtherBrowserSessionsForm extends Component
         });
     }
 
-    /**
-     * Render the component.
-     *
-     * @return \Illuminate\View\View
-     */
     public function render()
     {
         return view('profile.logout-other-browser-sessions-form');

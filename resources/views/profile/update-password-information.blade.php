@@ -63,7 +63,9 @@
                                                         autocomplete="new-password" required />
                                                     <x-input-error for="password_confirmation" />
                                                 </div>
-                                                <x-button type="submit" class="float-right btn btn-primary ">Simpan
+                                                <x-button type="submit" class="float-right btn btn-primary "
+                                                    wire:loading.class="float-right btn disabled btn-primary btn-progress">
+                                                    Simpan
                                                 </x-button>
 
                                             </form>
