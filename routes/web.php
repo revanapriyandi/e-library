@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormatController;
 use App\Http\Controllers\UserProfileController;
 
 /*
@@ -29,4 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/profile/update-password', App\Http\Livewire\Profile\UpdatePasswordInformation::class)->name('profile.update-password');
     Route::get('/user/profile/update-profile', App\Http\Livewire\Profile\UpdateProfileInformation::class)->name('profile.update-profile');
     Route::get('/user/profile/update-lainnya', App\Http\Livewire\Profile\UpdateInformationLainnya::class)->name('profile.update-lainnya');
+
+    Route::get('/referensi/daftar-format-pustaka', [FormatController::class, 'index'])->name('format.index');
 });

@@ -12,7 +12,7 @@
         </li>
         <li class="menu-header">Starter</li>
         <li>
-            <a href="#" class="nav-link"><i class="fa fa-align-center"></i>
+            <a href="{{ route('format.index') }}" class="nav-link"><i class="fa fa-align-center"></i>
                 <span>Format</span></a>
         </li>
         <li>
