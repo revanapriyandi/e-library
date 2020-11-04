@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pustaka;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Format extends Model
 {
@@ -13,11 +14,16 @@ class Format extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = ['kode', 'nama', 'keterangan'];
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'format';
+
+    public function pustaka()
+    {
+        return $this->hasOne(Pustaka::class, 'format');
+    }
 }
