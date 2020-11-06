@@ -41,7 +41,10 @@ class UpdateProfileInformation extends Component
             return redirect()->route('profile.update-profile');
         }
 
+        $this->emit('alert', ['type' => 'success', 'message' => 'Profile berhasil diperbaharui']);
+
         $this->emit('saved');
+
 
         $this->emit('refreshnavigation');
     }
@@ -55,6 +58,9 @@ class UpdateProfileInformation extends Component
     public function deleteProfilePhoto()
     {
         Auth::user()->deleteProfilePhoto();
+
+        $this->emit('alert', ['type' => 'success', 'message' => 'Foto profile berhasil didelete']);
+
 
         $this->emit('refreshnavigation');
     }

@@ -5,23 +5,31 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <meta name="turbolinks-visit-control" content="reload">
 
     <title>{{ config('app.name') ?? $title }}</title>
-    @livewireStyles
+
+    <livewire:styles />
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
-
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/prism/prism.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/css/iziToast.min.css') }}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-94034622-3');
+    </script>
     @stack('css')
     <style>
         /* width */
@@ -51,10 +59,10 @@
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
 
-            @livewire('navigation')
+            <livewire:navigation />
 
-            <div class="main-sidebar sidebar-style-2">
-                @livewire('sidebar')
+            <div class="main-sidebar">
+                <livewire:sidebar />
             </div>
 
             <!-- Main Content -->
@@ -78,7 +86,9 @@
                             </div>
                         </div>
                     </div>
-                    {{ $slot }}
+                    <div class="section-body">
+                        {{ $slot }}
+                    </div>
 
                 </section>
             </div>
@@ -94,6 +104,7 @@
         </div>
     </div>
     <!-- General JS Scripts -->
+    <livewire:scripts />
     <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/modules/popper.js') }}"></script>
     <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
@@ -103,48 +114,22 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('assets/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/prism/prism.js') }}"></script>
     <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/modules/izitoast/js/iziToast.min.js') }}"></script>
     @stack('js')
     <script>
-        @if (Session::has('message'))
-        @if (Session::get('message_type') == 'success')
-            iziToast.success({
-                title: 'Success ',
-                message: '{{ Session::get('message') }}',
-                position: 'bottomRight'
-            });
-        @elseif(Session::get('message_type') == 'warning')
-            iziToast.warning({
-                title: 'Waning !!',
-                message: '{{ Session::get('message') }}',
-                position: 'bottomRight'
-            });
-        @elseif(Session::get('message_type') == 'danger')
-            iziToast.danger({
-                title: 'Danger !',
-                message: '{{ Session::get('message') }}',
-                position: 'bottomRight'
-            });
-        @elseif(Session::get('message_type') == 'info')
-            iziToast.info({
-                title: 'Perhatian ',
-                message: '{{ Session::get('message') }}',
-                position: 'bottomRight'
-            });
-        @endif
-        @endif
+        function UpperCaseFirstLetter(str){
+            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        }
+        window.livewire.on('alert', param => {
+        iziToast[param['type']]({title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight'});
+        });
     </script>
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/index.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    @livewireScripts
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 @push('button')
-<x-button class="float-right btn btn-primary" data-toggle="modal" data-target="#modalFormat" id="btnTambahData">
+<x-button class="float-right btn btn-primary" data-toggle="modal" data-target="#modalRak" id="btnTambahData">
     {{ __('Tambah data') }}
 </x-button>
 <a href="" class="float-right btn btn-secondary">Cetak</a>
@@ -11,10 +11,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>All Format Pustaka</h4>
+                <h4>All Rak Pustaka</h4>
             </div>
             <div class="card-body">
-                @include('format.modal-format')
+                @include('rak.modal-rak')
                 <x-select-search>
                     @slot('filter')
                     wire:model="perPage"
@@ -24,12 +24,11 @@
                     @endslot
                 </x-select-search>
                 <div class="table-responsive">
-                    <table class="table table-striped dataTable no-footer" id="formatTable">
+                    <table class="table table-striped dataTable no-footer" id="rakTable">
                         <thead align="center">
                             <tr>
                                 <th width="5px">No</th>
-                                <th>Kode</th>
-                                <th>Nama</th>
+                                <th>Rak</th>
                                 <th>Jumlah Judul</th>
                                 <th>Jumlah Pustaka</th>
                                 <th>Keterangan</th>
@@ -44,20 +43,18 @@
                             @else
                             @foreach ($datas as $data)
                             @php
-                            $jml_judul = App\Models\Pustaka::where('format', $data->id)->get();
+                            $jml_judul = App\Models\Katalog::where('rak', $data->id)->join('pustaka',
+                            'katalog.id','pustaka.katalog')->get();
                             @endphp
                             <tr>
                                 <td width="5px">{{ $no++ }}</td>
-                                <td>{{ $data->kode }}</td>
-                                <td>{{ $data->nama }}</td>
-                                <td>{{ $jml_judul->count() }}
-                                    @if(!empty($jml_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
-                                </td>
+                                <td>{{ $data->rak }}</td>
+                                <td>{{ $jml_judul->count() }}</td>
                                 <td>{{ $jml_judul->sum('jumlah') }}</td>
                                 <td>{{ $data->keterangan }}</td>
                                 <td>
-                                    <x-button class="btn btn-warning btn-sm" data-toggle="modal"
-                                        data-target="#modalFormat" wire:click="edit({{ $data->id }})">
+                                    <x-button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalRak"
+                                        wire:click="edit({{ $data->id }})">
                                         <span class="fa fa-edit"></span></x-button>
                                     <x-button class="btn btn-danger btn-sm"
                                         onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
@@ -79,11 +76,11 @@
 </div>
 @push('js')
 <script type="text/javascript">
-    window.livewire.on('formatStore', () => {
-        $('#modalFormat').modal('hide');
+    window.livewire.on('rakStore', () => {
+        $('#modalRak').modal('hide');
         });
-        window.livewire.on('updatedFormat', () => {
-        $('#modalFormat').modal('hide');
+    window.livewire.on('updatedRak', () => {
+        $('#modalRak').modal('hide');
         });
 </script>
 @endpush

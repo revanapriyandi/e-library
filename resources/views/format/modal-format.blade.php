@@ -1,7 +1,10 @@
 <div>
-    <x-modal wire:ignore.self tabindex="-1" role="dialog" id="modalEditFormat">
+    <x-modal wire:ignore.self tabindex="-1" role="dialog" class="modal" id="modalFormat">
+        @slot('close')
+        wire:click="cancel()"
+        @endslot
         <x-slot name="title">
-            {{ __('Update Format Pustaka' ) }}
+            {{ __( $updateMode ? 'Update Format Pustaka' : 'Tambah Format Pustaka') }}
         </x-slot>
         <x-slot name="content">
             <form class="needs-validation" novalidate="">
@@ -23,12 +26,12 @@
                 </div>
         </x-slot>
         <x-slot name="footer">
-            <x-button class="btn btn-secondary" data-dismiss="modal">
+            <x-button class="btn btn-secondary" data-dismiss="modal" wire:click="cancel()">
                 {{ __('Batal') }}
             </x-button>
 
-            <x-button type="button" wire:click.prevent="update()" class="btn btn-primary"
-                wire:loading.class="btn disabled btn-primary btn-progress">
+            <x-button type="button" class="btn btn-primary" wire:loading.class="btn disabled btn-primary btn-progress"
+                wire:click.prevent="{{ $updateMode ? 'update()' : 'store()' }}">
                 {{ __('Simpan') }}
             </x-button>
             </form>
@@ -36,7 +39,7 @@
     </x-modal>
     @push('js')
     <script>
-        $("#modalEditFormat").modal({backdrop: false,show: false});
+        $(".modal").modal({backdrop: false,show: false});
     </script>
     @endpush
 </div>

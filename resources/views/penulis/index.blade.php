@@ -1,5 +1,5 @@
 @push('button')
-<x-button class="float-right btn btn-primary" data-toggle="modal" data-target="#modalFormat" id="btnTambahData">
+<x-button class="float-right btn btn-primary" data-toggle="modal" data-target="#modalPenulis" id="btnTambahData">
     {{ __('Tambah data') }}
 </x-button>
 <a href="" class="float-right btn btn-secondary">Cetak</a>
@@ -11,10 +11,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>All Format Pustaka</h4>
+                <h4>Daftar Penulis </h4>
             </div>
             <div class="card-body">
-                @include('format.modal-format')
+                @include('penulis.modal-penulis')
                 <x-select-search>
                     @slot('filter')
                     wire:model="perPage"
@@ -24,7 +24,7 @@
                     @endslot
                 </x-select-search>
                 <div class="table-responsive">
-                    <table class="table table-striped dataTable no-footer" id="formatTable">
+                    <table class="table table-striped dataTable no-footer" id="katalogTable">
                         <thead align="center">
                             <tr>
                                 <th width="5px">No</th>
@@ -32,6 +32,7 @@
                                 <th>Nama</th>
                                 <th>Jumlah Judul</th>
                                 <th>Jumlah Pustaka</th>
+                                <th>Kontak</th>
                                 <th>Keterangan</th>
                                 <th></th>
                             </tr>
@@ -39,12 +40,13 @@
                         <tbody align="center">
                             @empty($datas->total())
                             <tr>
-                                <td colspan="6">Tidak ada data</td>
+                                <td colspan="8">Tidak ada data</td>
                             </tr>
                             @else
                             @foreach ($datas as $data)
                             @php
-                            $jml_judul = App\Models\Pustaka::where('format', $data->id)->get();
+                            $jml_judul = App\Models\Penulis::join('pustaka',
+                            'penulis.id','pustaka.penulis')->where('pustaka.penulis',$data->id)->get();
                             @endphp
                             <tr>
                                 <td width="5px">{{ $no++ }}</td>
@@ -54,10 +56,11 @@
                                     @if(!empty($jml_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
                                 </td>
                                 <td>{{ $jml_judul->sum('jumlah') }}</td>
+                                <td>{{ $data->kontak }}</td>
                                 <td>{{ $data->keterangan }}</td>
                                 <td>
                                     <x-button class="btn btn-warning btn-sm" data-toggle="modal"
-                                        data-target="#modalFormat" wire:click="edit({{ $data->id }})">
+                                        data-target="#modalPenulis" wire:click="edit({{ $data->id }})">
                                         <span class="fa fa-edit"></span></x-button>
                                     <x-button class="btn btn-danger btn-sm"
                                         onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
@@ -79,11 +82,11 @@
 </div>
 @push('js')
 <script type="text/javascript">
-    window.livewire.on('formatStore', () => {
-        $('#modalFormat').modal('hide');
+    window.livewire.on('updatedPenulis', () => {
+        $('#modalPenulis').modal('hide');
         });
-        window.livewire.on('updatedFormat', () => {
-        $('#modalFormat').modal('hide');
+    window.livewire.on('penulisStore', () => {
+        $('#modalPenulis').modal('hide');
         });
 </script>
 @endpush

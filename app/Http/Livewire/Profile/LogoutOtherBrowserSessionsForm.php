@@ -30,6 +30,9 @@ class LogoutOtherBrowserSessionsForm extends Component
 
         $this->deleteOtherSessionRecords();
 
+        $this->emit('alert', ['type' => 'success', 'message' => 'Berhasil logout other devices']);
+
+
         $this->emit('loggedOut');
     }
 

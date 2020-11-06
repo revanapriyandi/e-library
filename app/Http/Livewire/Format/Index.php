@@ -4,13 +4,19 @@ namespace App\Http\Livewire\Format;
 
 use App\Models\Format;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Session;
 
 class Index extends Component
 {
-    public $data, $no = 1, $kode, $nama, $keterangan, $formatId;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $no = 1, $data, $kode, $nama, $keterangan;
+    public $perPage = 10;
+    public $query = '';
+    public $updatesQueryString = ['page'];
     public $updateMode = false;
-    public $modal = '';
 
     private function resetInputFields()
     {
@@ -19,40 +25,60 @@ class Index extends Component
         $this->keterangan = '';
     }
 
+    public function updated($field)
+    {
+        $this->validateOnly($field, [
+            'kode'   => 'required|max:3|unique:format,kode,' . $this->kode,
+            'nama' => 'required|max:100|string',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+    }
+
     public function store()
     {
         $validatedDate = $this->validate([
-            'kode' => 'required|max:3|unique:format,kode',
-            'nama' => 'required|string|max:100',
+            'kode'   => 'required|max:3|unique:format,kode,' . $this->kode,
+            'nama' => 'required|max:100|string',
             'keterangan' => 'nullable|string|max:255',
         ]);
 
         Format::create($validatedDate);
 
         $this->resetInputFields();
-        $this->updateMode = false;
-        Session::flash('message', "Data berhasil disimpan !");
-        Session::flash('message_type', 'success');
+
+        $this->emit('alert', ['type' => 'success', 'message' => 'Data berhasil ditambahkan !']);
+
         $this->emit('formatStore');
-    }
-
-
-    public function delete($id)
-    {
-        if ($id) {
-            Format::where('id', $id)->delete();
-            session()->flash('message', 'Format Deleted Successfully.');
-        }
     }
 
     public function edit($id)
     {
-        $this->updateMode = true;
-        $format = Format::where('id', $id)->first();
-        $this->format_id = $id;
-        $this->kode = $format->kode;
-        $this->nama = $format->nama;
-        $this->keterangan = $format->keterangan;
+        $this->data = Format::findOrFail($id);
+        if ($this->data) {
+            $this->updateMode = true;
+            $this->kode   = $this->data->kode;
+            $this->nama    = $this->data->nama;
+            $this->keterangan  = $this->data->keterangan;
+        }
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'kode'   => 'required|max:3',
+            'nama' => 'required|max:100|string',
+            'keterangan' => 'nullable|string|max:255',
+
+        ]);
+        $this->data->update([
+            'kode' => $this->kode,
+            'nama' => $this->nama,
+            'keterangan' => $this->keterangan,
+        ]);
+        $this->updateMode = false;
+
+        $this->emit('alert', ['type' => 'success', 'message' => 'Data berhasil diupdate !']);
+        $this->emit('updatedFormat');
     }
 
     public function cancel()
@@ -61,30 +87,21 @@ class Index extends Component
         $this->resetInputFields();
     }
 
-    public function update()
+    public function destroy($id)
     {
-        $validatedDate = $this->validate([
-            'kode' => 'required|max:3',
-            'nama' => 'required|string|max:100',
-            'keterangan' => 'nullable|string|max:255',
-        ]);
-
-        if ($this->formatId) {
-            $format = Format::find($this->formatId);
-            $format->update([
-                'kode' => $this->kode,
-                'nama' => $this->nama,
-                'keterangan' => $this->keterangan,
-            ]);
-            $this->updateMode = false;
-            session()->flash('message', 'Format Updated Successfully.');
-            $this->resetInputFields();
-        }
+        Format::find($id)->delete();
+        $this->emit('alert', ['type' => 'success', 'message' => 'Data berhasil dihapus !']);
     }
+
     public function render()
     {
-        $this->data = Format::orderBy('created_at', 'DESC')->get();
-        return view('format.index')
-            ->layout('layouts.app', ['header' => 'Daftar Format Pustaka']);
+        $datas = Format::where('nama', 'LIKE', "%$this->query%")
+            ->orWhere('kode', 'LIKE', "%$this->query%")
+            ->orWhere('keterangan', 'LIKE', "%$this->query%")
+            ->orderBy('id', 'ASC')
+            ->paginate($this->perPage);
+        $this->page > $datas->lastPage() ? $this->page = $datas->lastPage() : true;
+        return view('format.index', compact('datas'))
+            ->layout('layouts.app', ['header' => 'Format Pustaka']);
     }
 }

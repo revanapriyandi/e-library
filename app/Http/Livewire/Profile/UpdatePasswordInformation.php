@@ -37,6 +37,8 @@ class UpdatePasswordInformation extends Component
             'password_confirmation' => '',
         ];
 
+        $this->emit('alert', ['type' => 'success', 'message' => 'Password berhasil diubah !']);
+
         $this->emit('saved');
     }
 

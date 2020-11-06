@@ -23,11 +23,11 @@
                                     <div class="tab-pane fade active show" role="tabpanel">
                                         <h4 class="mb-3">{{ __('Pengaturan Lainnya') }}</h4>
                                         <hr>
-                                        @livewire('profile.change-email')
+                                        <livewire:profile.change-email />
                                         <hr>
                                         <div class="section-title">{{ __('Browser Sessions') }}
                                         </div>
-                                        @livewire('profile.logout-other-browser-sessions-form')
+                                        <livewire:profile.logout-other-browser-sessions-form />
                                     </div>
 
                                 </div>

@@ -32,4 +32,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/profile/update-lainnya', App\Http\Livewire\Profile\UpdateInformationLainnya::class)->name('profile.update-lainnya');
 
     Route::get('/referensi/daftar-format-pustaka', App\Http\Livewire\Format\Index::class)->name('format.index');
+
+    Route::get('/referensi/daftar-rak-pustaka', App\Http\Livewire\Rak\Index::class)->name('rak.index');
+
+    Route::get('/referensi/daftar-katalog-pustaka', App\Http\Livewire\Katalog\Index::class)->name('katalog.index');
+
+    Route::get('/referensi/daftar-penulis', App\Http\Livewire\Penulis\Index::class)->name('penulis.index');
 });

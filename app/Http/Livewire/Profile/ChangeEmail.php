@@ -18,6 +18,9 @@ class ChangeEmail extends Component
             'email' => $email
         ]);
         auth()->user()->sendEmailVerificationNotification();
+
+        $this->emit('alert', ['type' => 'success', 'message' => 'Email berhasil diubah']);
+
         $this->emit('saved');
     }
 

@@ -29,7 +29,7 @@
         wire:loading.attr="disabled">
         {{ __('Logout Other Browser Sessions') }}
     </x-button>
-    <x-modal tabindex="-1" role="dialog" id="ConfirmModal">
+    <x-modal wire:ignore.self tabindex="-1" role="dialog" id="ConfirmModal">
         <x-slot name="title">
             {{ __('Logout Other Browser Sessions') }}
         </x-slot>
