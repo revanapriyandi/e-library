@@ -48,10 +48,4 @@
             </form>
         </x-slot>
     </x-modal>
-    @push('js')
-    <script>
-        $(".modal").modal({backdrop: false,show: false});
-    </script>
-
-    @endpush
 </div>

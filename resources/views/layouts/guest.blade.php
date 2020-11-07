@@ -14,6 +14,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-social/bootstrap-social.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

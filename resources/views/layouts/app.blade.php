@@ -10,7 +10,6 @@
 
     <title>{{ config('app.name') ?? $title }}</title>
 
-    <livewire:styles />
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
@@ -22,14 +21,7 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('assets/modules/prism/prism.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/css/iziToast.min.css') }}">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-94034622-3');
-    </script>
+    <livewire:styles />
     @stack('css')
     <style>
         /* width */
@@ -58,39 +50,32 @@
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
-
             <livewire:navigation />
-
-            <div class="main-sidebar">
+            <div class="main-sidebar sidebar-style-2">
                 <livewire:sidebar />
             </div>
 
             <!-- Main Content -->
             <div class="main-content">
-                <section class="section">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 col-lg-6 col-6 col-sm-6">
-                                            <h5>{{ $header }}</h5>
-                                        </div>
-                                        <div class=" col-md-6 col-lg-6 col-6 col-sm-6">
-                                            <div class="buttons">
-                                                @stack('button')
-                                            </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-6 col-sm-6">
+                                        <h5>{{ $header }}</h5>
+                                    </div>
+                                    <div class=" col-md-6 col-lg-6 col-6 col-sm-6">
+                                        <div class="buttons">
+                                            @stack('button')
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="section-body">
-                        {{ $slot }}
-                    </div>
-
-                </section>
+                </div>
+                {{ $slot }}
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
@@ -103,7 +88,7 @@
             </footer>
         </div>
     </div>
-    <!-- General JS Scripts -->
+
     <livewire:scripts />
     <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/modules/popper.js') }}"></script>
@@ -120,11 +105,11 @@
     @stack('js')
     <script>
         function UpperCaseFirstLetter(str){
-            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-        }
-        window.livewire.on('alert', param => {
-        iziToast[param['type']]({title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight'});
-        });
+                return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+            }
+            window.livewire.on('alert', param => {
+            iziToast[param['type']]({title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight'});
+            });
     </script>
 
     <!-- Template JS File -->

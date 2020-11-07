@@ -55,11 +55,4 @@
             </x-slot>
         </form>
     </x-modal>
-    @push('js')
-    <script>
-        $("#btnConfirm").click(function(){
-        $("#ConfirmModal").modal({backdrop: false});
-        });
-    </script>
-    @endpush
 </div>
