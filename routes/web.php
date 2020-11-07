@@ -40,4 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/referensi/daftar-penerbit', App\Http\Livewire\Penerbit\Index::class)->name('penerbit.index');
 
     Route::get('/referensi/daftar-penulis', App\Http\Livewire\Penulis\Index::class)->name('penulis.index');
+
+
+
+    Route::get('/settings', App\Http\Livewire\Settings\Index::class)->name('settings.index');
 });

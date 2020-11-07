@@ -45,17 +45,19 @@
                             @else
                             @foreach ($datas as $data)
                             @php
-                            $jml_judul = App\Models\Penulis::join('pustaka',
+                            $num_judul = App\Models\Penulis::join('pustaka',
                             'penulis.id','pustaka.penulis')->where('pustaka.penulis',$data->id)->get();
+                            $num_pustaka =
+                            App\Models\Pustaka::rightJoin('daftar_pustaka','pustaka.id','daftar_pustaka.pustaka')->where('pustaka.penulis',$data->id)->select('daftar_pustaka.id')->get();
                             @endphp
                             <tr>
                                 <td width="5px">{{ $no++ }}</td>
                                 <td>{{ $data->kode }}</td>
                                 <td>{{ $data->nama }}</td>
-                                <td>{{ $jml_judul->count() }}
-                                    @if(!empty($jml_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
+                                <td>{{ $num_judul->count() }}
+                                    @if(!empty($num_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
                                 </td>
-                                <td>{{ $jml_judul->sum('jumlah') }}</td>
+                                <td>{{ $num_pustaka->count() }}</td>
                                 <td>{{ $data->kontak }}</td>
                                 <td>{{ $data->keterangan }}</td>
                                 <td>

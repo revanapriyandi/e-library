@@ -51,7 +51,7 @@
     </ul>
 
     <div class="p-3 mt-4 mb-4 hide-sidebar-mini">
-        <a href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
+        <a href="{{ route('settings.index') }}" class="btn btn-primary btn-lg btn-block btn-icon-split">
             <i class="fa fa-cogs"></i> Pengaturan
         </a>
     </div>

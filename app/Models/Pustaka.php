@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DaftarPustaka;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pustaka extends Model
 {
@@ -20,4 +21,9 @@ class Pustaka extends Model
      * @var string
      */
     protected $table = 'pustaka';
+
+    public function daftarPustaka()
+    {
+        return $this->hasMany(DaftarPustaka::class, 'pustaka');
+    }
 }

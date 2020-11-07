@@ -40,8 +40,8 @@
                 </x-button>
             </div>
         </form>
-        <div class="mt-3 text-center text-muted">
+        {{-- <div class="mt-3 text-center text-muted">
             Tidak Memiliki Akun ? <a href="{{ route('register') }}">Mendaftar</a>
-        </div>
+        </div> --}}
     </x-authentication-card>
 </x-guest-layout>

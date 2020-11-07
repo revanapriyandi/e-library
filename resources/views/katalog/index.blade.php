@@ -45,8 +45,10 @@
                             @else
                             @foreach ($datas as $data)
                             @php
-                            $jml_judul = App\Models\Katalog::join('pustaka',
+                            $num_judul = App\Models\Katalog::join('pustaka',
                             'katalog.id','pustaka.katalog')->where('pustaka.katalog',$data->id)->get();
+                            $num_pustaka =
+                            App\Models\Pustaka::rightJoin('daftar_pustaka','pustaka.id','daftar_pustaka.pustaka')->where('pustaka.katalog',$data->id)->select('daftar_pustaka.id')->get();
                             @endphp
                             <tr>
                                 <td width="5px">{{ $no++ }}</td>
@@ -55,10 +57,10 @@
                                 <td>
                                     <a href="{{ route('rak.index') }}">{{ $data->raks->rak }}</a>
                                 </td>
-                                <td>{{ $jml_judul->count() }}
-                                    @if(!empty($jml_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
+                                <td>{{ $num_judul->count() }}
+                                    @if(!empty($num_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
                                 </td>
-                                <td>{{ $jml_judul->sum('jumlah') }}</td>
+                                <td>{{ $num_pustaka->count() }}</td>
                                 <td>{{ $data->keterangan }}</td>
                                 <td>
                                     <x-button class="btn btn-warning btn-sm" data-toggle="modal"

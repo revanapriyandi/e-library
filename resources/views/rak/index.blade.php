@@ -43,14 +43,18 @@
                             @else
                             @foreach ($datas as $data)
                             @php
-                            $jml_judul = App\Models\Katalog::where('rak', $data->id)->join('pustaka',
+                            $num_judul = App\Models\Katalog::where('rak', $data->id)->join('pustaka',
                             'katalog.id','pustaka.katalog')->get();
+                            $num_pustaka =
+                            App\Models\Pustaka::rightJoin('daftar_pustaka','pustaka.id','daftar_pustaka.pustaka')->where('pustaka.format',$data->id)->select('daftar_pustaka.id')->get();
                             @endphp
                             <tr>
                                 <td width="5px">{{ $no++ }}</td>
                                 <td>{{ $data->rak }}</td>
-                                <td>{{ $jml_judul->count() }}</td>
-                                <td>{{ $jml_judul->sum('jumlah') }}</td>
+                                <td>{{ $num_judul->count() }}
+                                    @if(!empty($num_judul)) <a href=""><span class="fa fa-search"></span></a> @endif
+                                </td>
+                                <td>{{ $num_pustaka->count() }}</td>
                                 <td>{{ $data->keterangan }}</td>
                                 <td>
                                     <x-button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalRak"
