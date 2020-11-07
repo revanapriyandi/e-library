@@ -23,8 +23,8 @@
             <a class="nav-link" href="{{ route('katalog.index') }}"><i class="fa fa-book"></i>
                 <span>Katalog</span></a>
         </li>
-        <li>
-            <a class="nav-link" href="#"><i class="fa fa-upload"></i>
+        <li class="{{ set_active('penerbit.index') }}">
+            <a class="nav-link" href="{{ route('penerbit.index') }}"><i class="fa fa-upload"></i>
                 <span>Penerbit</span></a>
         </li>
         <li class="{{ set_active('penulis.index') }}">
