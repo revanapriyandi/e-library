@@ -21,4 +21,9 @@ class Penulis extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function getNameAttribute()
+    {
+        return $this->gelar_depan . ' ' . $this->nama . ' ' . $this->gelar_belakang;
+    }
 }

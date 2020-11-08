@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/referensi/daftar-penulis', App\Http\Livewire\Penulis\Index::class)->name('penulis.index');
 
+    Route::get('/pustaka/daftar-pustaka', App\Http\Livewire\Pustaka\Index::class)->name('pustaka.index');
+    Route::get('/pustaka/pustaka-baru', App\Http\Livewire\Pustaka\AddPustaka::class)->name('pustaka.create');
 
 
     Route::get('/settings', App\Http\Livewire\Settings\Index::class)->name('settings.index');

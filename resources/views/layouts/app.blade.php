@@ -15,14 +15,15 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Template CSS -->
+    {{--  <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}"> --}}
+    @stack('css')
+    <livewire:styles />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('assets/modules/prism/prism.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/css/iziToast.min.css') }}">
-    <livewire:styles />
-    @stack('css')
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -44,6 +45,7 @@
             background: #929292;
         }
     </style>
+
 </head>
 
 <body>
@@ -97,7 +99,7 @@
     <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
-
+    {{--  <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script> --}}
     <!-- JS Libraies -->
     <script src="{{ asset('assets/modules/prism/prism.js') }}"></script>
     <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>

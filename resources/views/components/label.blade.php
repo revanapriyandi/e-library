@@ -1,2 +1,2 @@
 @props(['for','value'])
-<label for="{{ $for }}">{{ $value ?? $slot }}</label>
+<label for="{{ $for }}" {{ $attributes }}>{{ $value ?? $slot }}</label>

@@ -4,9 +4,6 @@
 </x-button>
 <a href="" class="float-right btn btn-secondary">Cetak</a>
 @endpush
-@push('css')
-<link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
-@endpush
 <div class="mt-4 row">
     <div class="col-12">
         <div class="card">

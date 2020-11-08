@@ -19,6 +19,9 @@ class CreateDaftarPustakasTable extends Migration
             $table->string('kodepustaka', 50);
             $table->boolean('status')->default('1');
             $table->boolean('aktif')->default('1');
+            $table->string('info1')->nullable();
+            $table->string('info2')->nullable();
+            $table->string('info3')->nullable();
             $table->timestamps();
         });
     }

@@ -32,9 +32,17 @@
                 <span>Penulis</span></a>
         </li>
         <li class="menu-header">Pustaka</li>
-        <li>
-            <a class="nav-link" href="#"><i class="fa fa-book-open"></i>
+        <li class="dropdown {{ set_active(['pustaka.index','pustaka.create']) }}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-book-open"></i>
                 <span>Pustaka</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{ set_active('pustaka.create') }}"><a class="nav-link"
+                        href="{{ route('pustaka.create') }}">Pustaka
+                        Baru</a></li>
+                <li class="{{ set_active('pustaka.index') }}"><a class="nav-link"
+                        href="{{ route('pustaka.index') }}">Daftar
+                        Pustaka</a></li>
+            </ul>
         </li>
         <li>
             <a class="nav-link" href="#"><i class="fa fa-cloud-upload-alt"></i>
