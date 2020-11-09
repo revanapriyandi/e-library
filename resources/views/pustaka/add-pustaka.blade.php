@@ -30,9 +30,10 @@
                                     <x-label for="katalog">
                                         {{ __('Katalog') }}
                                     </x-label>
-                                    <select name="katalog" id="katalog" class="form-control " wire:model="katalog"
-                                        required>
-                                        <option value="" disabled selected="">Katalog Pustaka</option>
+                                    <select name="katalog" id="katalog" data-placeholder="Katalog Pustaka"
+                                        class="form-control select2 {{ $errors->has('katalog') ? ' is-invalid' : '' }}"
+                                        wire:model="katalog" required>
+                                        <option value=""></option>
                                         @foreach ($katalogs as $ktlg)
                                         <option value="{{ $ktlg->id }}">{{ $ktlg->kode }} -
                                             {{ $ktlg->nama }}
@@ -45,9 +46,10 @@
                                     <x-label for="penulis">
                                         {{ __('Penulis') }}
                                     </x-label>
-                                    <select name="penulis" id="penulis" class="form-control " wire:model="penulis"
-                                        required>
-                                        <option value="" disabled selected>Penulis</option>
+                                    <select name="penulis" id="penulis" data-placeholder="Penulis"
+                                        class="form-control select2 {{ $errors->has('penulis') ? ' is-invalid' : '' }}"
+                                        wire:model="penulis" required>
+                                        <option value=""></option>
                                         @foreach ($penuliss as $pnlis)
                                         <option value="{{ $pnlis->id }}">{{ $pnlis->kode }} -
                                             {{ $pnlis->name }}
@@ -60,9 +62,10 @@
                                     <x-label for="penerbit">
                                         {{ __('Penerbit') }}
                                     </x-label>
-                                    <select name="penerbit" id="penerbit" class="form-control " wire:model="penerbit"
-                                        required>
-                                        <option value="" disabled selected>Penerbit</option>
+                                    <select name="penerbit" id="penerbit"
+                                        class="form-control select2 {{ $errors->has('penerbit') ? ' is-invalid' : '' }}"
+                                        data-placeholder="Penerbit" wire:model="penerbit" required>
+                                        <option value=""></option>
                                         @foreach ($penerbits as $pnbit)
                                         <option value="{{ $pnbit->id }}">{{ $pnbit->kode }} -
                                             {{ $pnbit->nama }}
@@ -71,12 +74,14 @@
                                     </select>
                                     <x-input-error for="penerbit" />
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group " wire:ignore>
                                     <x-label for="format">
                                         {{ __('Format') }}
                                     </x-label>
-                                    <select name="format" id="format" class="form-control " wire:model="format"
-                                        required>
+                                    <select name="format" id="format"
+                                        class="form-control select2 {{ $errors->has('format') ? ' is-invalid' : '' }}"
+                                        data-placeholder="Format Pustaka" wire:model="format" required>
+                                        <option value=""></option>
                                         @foreach ($formats as $frmat)
                                         <option value="{{ $frmat->id }}">{{ $frmat->kode }} - {{ $frmat->nama }}
                                         </option>
@@ -84,11 +89,14 @@
                                     </select>
                                     <x-input-error for="format" />
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group " wire:ignore>
                                     <x-label for="tahun">
                                         {{ __('Tahun Terbit') }}
                                     </x-label>
-                                    <select name="tahun" id="tahun" class="form-control " wire:model="tahun" required>
+                                    <select name="tahun" id="tahun"
+                                        class="form-control select2 {{ $errors->has('tahun') ? ' is-invalid' : '' }}"
+                                        data-placeholder="Tahun Terbit" wire:model="tahun" required>
+                                        <option value=""></option>
                                         @for ($i=date('Y'); $i>=date('Y')-32; $i-=1)
                                         <option value="{{ $i }}"> {{ $i }} </option>
                                         @endfor
@@ -131,8 +139,8 @@
                                                 Buah
                                             </div>
                                         </div>
+                                        <x-input-error for="jumlah" />
                                     </div>
-                                    <x-input-error for="jumlah" />
                                 </div>
                                 <div class="form-group ">
                                     <x-label for="cover">
@@ -156,11 +164,12 @@
                                     </div>
                                     <x-input-error for="cover" />
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group " wire:ignore>
                                     <x-label for="abstraksi">
                                         {{ __('Abstraksi') }}
                                     </x-label>
-                                    <textarea name="abstraksi" id="abstraksi" class="summernote-simple"
+                                    <textarea name="abstraksi" id="abstraksi"
+                                        class="form-control {{ $errors->has('abstraksi') ? ' is-invalid' : '' }}"
                                         wire:model="abstraksi" required></textarea>
                                     <x-input-error for="abstraksi" />
                                 </div>
@@ -176,8 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <x-button type="submit" wire:loading.class="btn disabled btn-primary btn-progress btn-block"
-                    class="btn btn-primary btn-block">{{ __('Simpan') }}</x-button>
+                <x-button type="submit" class="btn btn-primary btn-block">{{ __('Simpan') }}</x-button>
             </form>
         </div>
     </section>
@@ -186,7 +194,33 @@
     <script src="{{ asset('assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('js/rupiah.js') }}"></script>
     <script>
-        $("select").selectric();
+        window.livewire.on('resetInputs', () => {
+            $('#abstraksi').summernote('reset');
+            $('.select2').val(null).trigger('change');
+        });
+        $(document).ready(function() {
+        $('.select2').on('change', function(e){
+            let elementName = $(this).attr('id');
+            @this.set(elementName, e.target.value);
+        })
+        $(window).resize(function() {
+            $('.select2').css('width', "100%");
+        });
+        $('#abstraksi').summernote({
+            dialogsInBody: true,
+            minHeight: 150,
+            toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['para', ['paragraph']]
+            ],
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    @this.set('abstraksi', contents);
+                }
+            }
+        });
+    });
 
     function Blur(elementId){
         var value = document.getElementById(elementId).value;

@@ -8,7 +8,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('settings.index',)
+        return view('settings.index')
             ->layout('layouts.app', ['header' => 'Pengaturan']);
     }
 }

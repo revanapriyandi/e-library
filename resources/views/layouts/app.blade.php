@@ -16,6 +16,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Template CSS -->
     {{--  <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
     @stack('css')
     <livewire:styles />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -100,6 +101,7 @@
     <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
     {{--  <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- JS Libraies -->
     <script src="{{ asset('assets/modules/prism/prism.js') }}"></script>
     <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
