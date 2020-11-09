@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pustaka;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DaftarPustaka extends Model
 {
@@ -21,4 +22,9 @@ class DaftarPustaka extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function dataPustaka()
+    {
+        return $this->belongsTo(Pustaka::class, 'pustaka');
+    }
 }

@@ -4,14 +4,27 @@ namespace App\Http\Livewire\Pustaka;
 
 use App\Models\Pustaka;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $no = 1, $rakId, $rak, $keterangan;
+    public $perPage = 10;
+    public $query = '';
+    public $updatesQueryString = ['page'];
+
     public function render()
     {
-        return view('pustaka.index', [
-            'datas' => Pustaka::with(['daftarPustaka', 'katalog'])->orderBy('created_at', 'ASC')->paginate(10),
-        ])
+        $datas = Pustaka::with(['daftarPustaka', 'katalogs'])
+            ->where('katalog', 'LIKE', "%$this->query%")
+            ->orWhere('judul', 'LIKE', "%$this->query%")
+            ->orderBy('id', 'ASC')
+            ->paginate($this->perPage);
+        $this->page > $datas->lastPage() ? $this->page = $datas->lastPage() : true;
+        return view('pustaka.index', compact('datas'))
             ->layout('layouts.app', ['header' => 'Daftar Pustaka']);
     }
 }

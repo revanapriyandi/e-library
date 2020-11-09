@@ -185,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <x-button type="submit" class="btn btn-primary btn-block">{{ __('Simpan') }}</x-button>
+                <x-button type="submit" class="btn btn-primary btn-block"  wire:loading.class="btn disabled btn-primary btn-progress btn-block">{{ __('Simpan') }}</x-button>
             </form>
         </div>
     </section>

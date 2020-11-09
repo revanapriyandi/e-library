@@ -114,10 +114,12 @@
             window.livewire.on('alert', param => {
             iziToast[param['type']]({title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight'});
             });
+
     </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('js/function.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 

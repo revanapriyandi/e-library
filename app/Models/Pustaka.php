@@ -27,7 +27,7 @@ class Pustaka extends Model
         return $this->hasMany(DaftarPustaka::class, 'pustaka');
     }
 
-    public function katalog()
+    public function katalogs()
     {
         return $this->belongsTo(Katalog::class, 'katalog');
     }
