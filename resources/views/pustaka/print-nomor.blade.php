@@ -24,7 +24,7 @@
                     $i = 1;
                     $cellcnt = 1;
                     @endphp
-                    @while ($row = $daftarPustaka)
+                    @foreach ($daftarPustaka as $row)
                     @if ($cellcnt == 1 || $cellcnt % 9 == 1)
                     <table border='0' width='99%' cellspacing='0' cellpadding='5'>
                         @endif
@@ -33,17 +33,18 @@
                             @endif
 
                             @php
-                            $kode = explode('/',$row[0]);
-                            $barcode = $row[1];
+                            $kode = explode('/',$row->kodepustaka);
+                            $barcode = $row->info1;
                             @endphp
 
                             <td width="33%" align="center">
 
                                 <table border='1' cellpadding='2'
                                     style='border-width: 1px; border-style: dashed; border-collapse: collapse'>
+                                    <br><br><br><br>
                                     <tr style='border-width: 1px; border-style: dashed; border-collapse: collapse'>
                                         <td align='center'>
-                                            <font style='font-size: 12px;'>{{ $row[0] }}</font><br><br>
+                                            <font style='font-size: 12px;'>{{ $row->kodepustaka }}</font><br><br>
                                             <table width="200" border="1" cellspacing="0" cellpadding="0" class="tab2">
                                                 <tr height="30">
                                                     <td align="center" style='font-size: 32px'>{{ $kode[0] }}</td>
@@ -63,9 +64,9 @@
                                     </tr>
                                     <tr style='border-width: 1px; border-style: dashed; border-collapse: collapse'>
                                         <td align='center'>
-                                            <font style='font-size: 12px;'>{{ $row[0] }}</font><br><br>
+                                            <font style='font-size: 12px;'>{{ $row->kodepustaka }}</font><br><br>
                                             <img width='160'
-                                                src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39')}}">
+                                                src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39E')}}">
                                             <br><br>
                                         </td>
                                     </tr>
@@ -82,11 +83,10 @@
                     @endif
                     @php
                     $i++;
-
                     $cellcnt += 1;
                     @endphp
 
-                    @endwhile
+                    @endforeach
             </td>
         </tr>
     </table>
