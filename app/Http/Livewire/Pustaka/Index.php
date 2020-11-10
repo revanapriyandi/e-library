@@ -16,6 +16,13 @@ class Index extends Component
     public $query = '';
     public $updatesQueryString = ['page'];
 
+    public function destroy($PustakaId)
+    {
+        Pustaka::find($PustakaId)->delete();
+
+        $this->emit('alert', ['type' => 'success', 'message' => 'Order deleted successfully! ']);
+    }
+
     public function render()
     {
         $datas = Pustaka::with(['daftarPustaka', 'katalogs'])

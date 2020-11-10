@@ -55,7 +55,11 @@
                                             class="fa fa-book"></span>
                                     </x-link>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <a href="javascript:" wire:click="$emit('triggerDelete',{{ $pus->id }})">
+                                        <span class="fa fa-trash text-danger"></span>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -71,4 +75,29 @@
             </div>
         </div>
     </div>
+    @push('js')
+    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @this.on('triggerDelete', PustakaId => {
+                swal({
+                    title: 'Are you sure?',
+                    text: 'Once deleted, you will not be able to recover this imaginary file!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((result) => {
+                        if (result) {
+                            @this.call('destroy',PustakaId)
+                            window.livewire.on('alert', param => {
+                            swal(param['message']);
+                            });
+                        } else {
+                            swal('Operation Canceled.');
+                        }
+                    });
+                });
+            });
+    </script>
+    @endpush
 </div>
