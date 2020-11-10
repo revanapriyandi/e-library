@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pustaka/daftar-pustaka', App\Http\Livewire\Pustaka\Index::class)->name('pustaka.index');
     Route::get('/pustaka/pustaka-baru', App\Http\Livewire\Pustaka\AddPustaka::class)->name('pustaka.create');
     Route::get('/pustaka/pustaka-print-nomor/{id}', [PustakaController::class, 'printNomor'])->name('pustaka.print-nomor');
+    Route::get('/pustaka/pustaka-tambah-&-hapus-pustaka/{id}', App\Http\Livewire\Pustaka\Adddel::class)->name('pustaka.adddel');
 
 
     Route::get('/settings', App\Http\Livewire\Settings\Index::class)->name('settings.index');

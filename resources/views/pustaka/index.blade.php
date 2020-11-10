@@ -45,10 +45,16 @@
                                 <td>{{ $pus->daftarPustaka->where('status',1)->count() }}</td>
                                 <td>{{ $pus->daftarPustaka->where('status',0)->count() }}</td>
                                 <td>
-                                    <x-link href="javascript:cetak_nomor({{ $pus->id }})"><span
-                                            class="fa fa-barcode"></span></x-link>
+                                    <x-link href="javascript:cetak_nomor({{ $pus->id }})" data-toggle="tooltip"
+                                        data-placement="bottom" title="Cetak Label."><span class="fa fa-barcode"></span>
+                                    </x-link>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <x-link href="{{ route('pustaka.adddel',$pus->id) }}" data-toggle="tooltip"
+                                        data-placement="bottom" title="Penambahan dan Pengurangan Pustaka."><span
+                                            class="fa fa-book"></span>
+                                    </x-link>
+                                </td>
                                 <td></td>
                             </tr>
                             @empty

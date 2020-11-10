@@ -1,3 +1,3 @@
 <div>
-    <a href="{{ $href }}" {{ $attributes }}>{{ $value ?? $slot }}</a>
+    <a {{ $attributes }}>{{ $value ?? $slot }}</a>
 </div>

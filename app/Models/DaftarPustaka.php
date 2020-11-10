@@ -27,4 +27,9 @@ class DaftarPustaka extends Model
     {
         return $this->belongsTo(Pustaka::class, 'pustaka');
     }
+
+    public function getStatusedAttribute()
+    {
+        return $this->status ? '<span class="badge badge-primary">Tersedia</span>' : '<span class="badge badge-success">Dipinjam</span>';
+    }
 }
