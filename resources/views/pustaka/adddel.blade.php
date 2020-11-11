@@ -100,7 +100,6 @@
     @include('pustaka.modal-tambah-addel-pustaka')
     @push('js')
     <script src="{{ asset('js/daftar_pustaka.js') }}"></script>
-    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
     <script>
         window.livewire.on('pustakaStore', () => {
         $('#modalAddelPustaka').modal('hide');

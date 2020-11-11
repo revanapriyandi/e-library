@@ -40,7 +40,7 @@
                                 <td colspan="6">Tidak ada data</td>
                             </tr>
                             @else
-                            @foreach ($datas as $data)
+                            @foreach ($datas as $kat => $data)
                             @php
                             $num_judul = App\Models\Katalog::join('pustaka',
                             'katalog.id','pustaka.katalog')->where('pustaka.katalog',$data->id)->get();
@@ -48,7 +48,7 @@
                             App\Models\Pustaka::rightJoin('daftar_pustaka','pustaka.id','daftar_pustaka.pustaka')->where('pustaka.katalog',$data->id)->select('daftar_pustaka.id')->get();
                             @endphp
                             <tr>
-                                <td width="5px">{{ $no++ }}</td>
+                                <td width="5px">{{$kat + $datas->firstItem() }}</td>
                                 <td>{{ $data->kode }}</td>
                                 <td>{{ $data->nama }}</td>
                                 <td>
@@ -64,8 +64,7 @@
                                         data-target="#modalKatalog" wire:click="edit({{ $data->id }})">
                                         <span class="fa fa-edit"></span></x-button>
                                     <x-button class="btn btn-danger btn-sm"
-                                        onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
-                                        wire:click="destroy({{ $data->id }})">
+                                        wire:click="$emit('triggerDelete',{{ $data->id }})">
                                         <span class="fa fa-trash"></span></x-button>
                                 </td>
                             </tr>
@@ -89,5 +88,25 @@
     window.livewire.on('updatedKatalog', () => {
     $('#modalKatalog').modal('hide');
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        @this.on('triggerDelete', id => {
+            swal({
+                title: 'Are you sure?',
+                text: 'Once deleted, you will not be able to recover this imaginary file!',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+            }).then((result) => {
+                    if (result) {
+                        @this.call('destroy',id)
+                        window.livewire.on('alert', param => {
+                        swal(param['message']);
+                        });
+                    } else {
+                        swal('Operation Canceled.');
+                    }
+                });
+            });
+        });
 </script>
 @endpush

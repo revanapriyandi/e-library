@@ -19,7 +19,6 @@
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.2",
         "milon/barcode": "^8.0",
-        "renatomarinho/laravel-page-speed": "^1.9",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

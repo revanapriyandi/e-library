@@ -103,6 +103,7 @@
     {{--  <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script> --}}
     <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- JS Libraies -->
+    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/modules/prism/prism.js') }}"></script>
     <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/modules/izitoast/js/iziToast.min.js') }}"></script>

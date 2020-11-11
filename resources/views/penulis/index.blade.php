@@ -40,7 +40,7 @@
                                 <td colspan="8">Tidak ada data</td>
                             </tr>
                             @else
-                            @foreach ($datas as $data)
+                            @foreach ($datas as $pen => $data)
                             @php
                             $num_judul = App\Models\Penulis::join('pustaka',
                             'penulis.id','pustaka.penulis')->where('pustaka.penulis',$data->id)->get();
@@ -48,7 +48,7 @@
                             App\Models\Pustaka::rightJoin('daftar_pustaka','pustaka.id','daftar_pustaka.pustaka')->where('pustaka.penulis',$data->id)->select('daftar_pustaka.id')->get();
                             @endphp
                             <tr>
-                                <td width="5px">{{ $no++ }}</td>
+                                <td width="5px">{{ $pen + $datas->firstItem() }}</td>
                                 <td>{{ $data->kode }}</td>
                                 <td>{{ $data->nama }}</td>
                                 <td>{{ $num_judul->count() }}
@@ -62,8 +62,7 @@
                                         data-target="#modalPenulis" wire:click="edit({{ $data->id }})">
                                         <span class="fa fa-edit"></span></x-button>
                                     <x-button class="btn btn-danger btn-sm"
-                                        onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
-                                        wire:click="destroy({{ $data->id }})">
+                                        wire:click="$emit('triggerDelete',{{ $data->id }})">
                                         <span class="fa fa-trash"></span></x-button>
                                 </td>
                             </tr>
@@ -86,6 +85,26 @@
         });
     window.livewire.on('penulisStore', () => {
         $('#modalPenulis').modal('hide');
+        });
+    document.addEventListener('DOMContentLoaded', function () {
+        @this.on('triggerDelete', id => {
+            swal({
+                title: 'Are you sure?',
+                text: 'Once deleted, you will not be able to recover this imaginary file!',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+            }).then((result) => {
+                    if (result) {
+                        @this.call('destroy',id)
+                        window.livewire.on('alert', param => {
+                        swal(param['message']);
+                        });
+                    } else {
+                        swal('Operation Canceled.');
+                    }
+                });
+            });
         });
 </script>
 @endpush

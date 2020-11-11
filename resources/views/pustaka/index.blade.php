@@ -2,7 +2,7 @@
 <script src="{{ asset('js/daftar_pustaka.js') }}"></script>
 @endpush
 @push('button')
-<a href="" class="float-right btn btn-primary">
+<a href="{{ route('pustaka.create') }}" class="float-right btn btn-primary">
     {{ __('Tambah data') }}
 </a>
 <a href="" class="float-right btn btn-secondary">Cetak</a>
@@ -76,7 +76,6 @@
         </div>
     </div>
     @push('js')
-    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             @this.on('triggerDelete', PustakaId => {
