@@ -60,6 +60,8 @@ class General extends Component
             'DB_USERNAME'   => $this->db_user,
             'DB_PASSWORD'   => $this->db_pass,
         ]);
+        $this->emit('alert', ['type' => 'success', 'message' => 'Data berhasil ditambahkan !']);
+        return response()->json([]);
     }
 
     public function render()
