@@ -45,6 +45,7 @@
 <body>
     <div id="app">
         {{ $slot }}
+        @captcha
     </div>
 
     <!-- General JS Scripts -->

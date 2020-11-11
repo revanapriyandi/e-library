@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 col-6 col-sm-6">
-                                        <h5>{{ $header }}</h5>
+                                        <h5>{{ $header ?? '' }}</h5>
                                     </div>
                                     <div class=" col-md-6 col-lg-6 col-6 col-sm-6">
                                         <div class="buttons">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                {{ $slot }}
+                {{ $slot ?? '' }}
             </div>
             <footer class="main-footer">
                 <div class="footer-left">

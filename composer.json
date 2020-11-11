@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "brotzka/laravel-dotenv-editor": "^2.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -16,6 +17,7 @@
         "jenssegers/agent": "^2.6",
         "laravel/fortify": "^1.6",
         "laravel/framework": "^8.0",
+        "laravel/helpers": "^1.4",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.2",
         "milon/barcode": "^8.0",

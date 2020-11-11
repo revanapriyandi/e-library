@@ -33,7 +33,6 @@
                     tabindex="2" required autocomplete="current-password" />
                 <x-input-error for="password" />
             </div>
-
             <div class="form-group">
                 <x-button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                     {{ __('Masuk') }}
