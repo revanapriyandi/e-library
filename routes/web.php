@@ -49,4 +49,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/settings', App\Http\Livewire\Settings\Index::class)->name('settings.index');
+    Route::get('/settings/system', App\Http\Livewire\Settings\System::class)->name('settings.system');
 });
