@@ -52,16 +52,8 @@ class System extends Component
 
     public function render()
     {
-        $env = new DotenvEditor();
-        $data = $env->getContent();
-        try {
-            $data['backups'] = $env->getBackupVersions();
-        } catch (DotEnvException $e) {
-            $data['backups'] = false;
-        }
 
-
-        return view('settings.system', compact('data'))
+        return view('settings.system',)
             ->layout('layouts.app', ['header' => 'System Settings']);
     }
 }
