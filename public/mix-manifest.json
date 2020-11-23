@@ -1,6 +1,8 @@
 {
     "/js/app.js": "/js/app.js?id=fd59710562e4cf50031e",
     "/css/app.css": "/css/app.css?id=d41d8cd98f00b204e980",
-    "/css/template.css": "/css/template.css?id=f042f7134543d1b72d85",
+    "/css/template.css": "/css/template.css?id=df4c2f5ee60e8eadd4dc",
+    "/css/template-guest.css": "/css/template-guest.css?id=d33831fee9bd058270c9",
+    "/js/template-guest.js": "/js/template-guest.js?id=3745b772f1d66ae5b191",
     "/js/template.js": "/js/template.js?id=214c35077a0a85c47055"
 }
