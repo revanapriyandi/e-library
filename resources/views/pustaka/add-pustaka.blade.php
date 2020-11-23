@@ -185,7 +185,8 @@
                         </div>
                     </div>
                 </div>
-                <x-button type="submit" class="btn btn-primary btn-block"  wire:loading.class="btn disabled btn-primary btn-progress btn-block">{{ __('Simpan') }}</x-button>
+                <x-button type="submit" class="btn btn-primary btn-block"
+                    wire:loading.class="btn disabled btn-primary btn-progress btn-block">{{ __('Simpan') }}</x-button>
             </form>
         </div>
     </section>
@@ -198,28 +199,29 @@
             $('#abstraksi').summernote('reset');
             $('.select2').val(null).trigger('change');
         });
+
         $(document).ready(function() {
-        $('.select2').on('change', function(e){
-            let elementName = $(this).attr('id');
-            @this.set(elementName, e.target.value);
-        })
-        $(window).resize(function() {
-            $('.select2').css('width', "100%");
-        });
-        $('#abstraksi').summernote({
-            dialogsInBody: true,
-            minHeight: 150,
-            toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough']],
-            ['para', ['paragraph']]
-            ],
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    @this.set('abstraksi', contents);
+            $('.select2').on('change', function(e){
+                let elementName = $(this).attr('id');
+                @this.set(elementName, e.target.value);
+            })
+            $(window).resize(function() {
+                $('.select2').css('width', "100%");
+            });
+            $('#abstraksi').summernote({
+                dialogsInBody: true,
+                minHeight: 150,
+                toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough']],
+                ['para', ['paragraph']]
+                ],
+                callbacks: {
+                    onChange: function(contents, $editable) {
+                        @this.set('abstraksi', contents);
+                    }
                 }
-            }
-        });
+            });
     });
 
     function Blur(elementId){
