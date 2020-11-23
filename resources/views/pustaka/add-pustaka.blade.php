@@ -222,7 +222,7 @@
                     }
                 }
             });
-    });
+        });
 
     function Blur(elementId){
         var value = document.getElementById(elementId).value;

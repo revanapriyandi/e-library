@@ -16,7 +16,7 @@ class CreatePinjamsTable extends Migration
         Schema::create('pinjam', function (Blueprint $table) {
             $table->id();
             $table->date('tgl_pinjam');
-            $table->date('tg_kembali');
+            $table->date('tgl_kembali');
             $table->string('keterangan');
             $table->string('id_anggota');
             $table->string('nis', 20)->nullable();

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FormatController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\PustakaController;
 
@@ -46,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pustaka/pustaka-baru', App\Http\Livewire\Pustaka\AddPustaka::class)->name('pustaka.create');
     Route::get('/pustaka/pustaka-print-nomor/{id}', [PustakaController::class, 'printNomor'])->name('pustaka.print-nomor');
     Route::get('/pustaka/pustaka-tambah-&-hapus-pustaka/{id}', App\Http\Livewire\Pustaka\Adddel::class)->name('pustaka.adddel');
+
+    Route::get('/peminjaman', App\Http\Livewire\Pinjam\Peminjaman::class)->name('pinjam.peminjaman');
 
 
     Route::get('/settings', App\Http\Livewire\Settings\Index::class)->name('settings.index');

@@ -44,8 +44,8 @@
                         Pustaka</a></li>
             </ul>
         </li>
-        <li>
-            <a class="nav-link" href="#"><i class="fa fa-cloud-upload-alt"></i>
+        <li class="{{ set_active('pinjam.peminjaman') }}">
+            <a class="nav-link" href="{{ route('pinjam.peminjaman') }}"><i class="fa fa-cloud-upload-alt"></i>
                 <span>Peminjaman</span></a>
         </li>
         <li>
