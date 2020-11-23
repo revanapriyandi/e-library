@@ -14,6 +14,9 @@
                         <option value="nis">NIS Siswa</option>
                         <option value="nip">NIP Pegawai</option>
                     </select>
+                    {{--  @dump($this->kriteria)  --}}
+                    {{--  @if ($kriteria != 'all')
+                    @if ($kriteria == 'tgl_pinjam' || $kriteria == 'tgl_kembali')
                     <div class="mt-3 form-inline">
                         <div class="row col-md-12 col-lg-12 col-12">
                             <div class="col-md-6 col-lg-6 col-6">
@@ -46,6 +49,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @endif  --}}
                 </div>
                 <x-select-search>
                     @slot('search')
@@ -68,18 +73,37 @@
                             </tr>
                         </thead>
                         <tbody align="center">
-                            {{--  @forelse ($datas as $data => $pus)
-
+                            @forelse ($datas as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ date('d-m-Y',strtotime($data->tgl_pinjam)) }}</td>
+                                <td>{{ date('d-m-Y',strtotime($data->tgl_kembali)) }}</td>
+                                <td>{{ $data->KodeAnggota }} <br /> {{ $data->anggota->nama }}</td>
+                                <td>{{ $data->daftarPustaka->kodepustaka }} <br />
+                                    {{ $data->daftarPustaka->dataPustaka->judul }}</td>
+                                <td>{{ $data->keterangan }}</td>
+                                <td>{!! $data->telat() !!}</td>
+                                <td>
+                                    <a href="" class="btn btn-success btn-sm" data-toggle="tooltip"
+                                        data-placement="bottom" title="" data-original-title="Kembalikan sekarang"><span
+                                            class=" fa fa-exchange-alt"></span></a>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-success btn-sm" data-toggle="tooltip"
+                                        data-placement="bottom" title="" data-original-title="Perpanjangan"><span
+                                            class="fa fa-plus"></span></a>
+                                </td>
+                            </tr>
                             @empty
                             <tr>
                                 <td colspan="9">Tidak ada data</td>
                             </tr>
-                            @endforelse  --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="float-right">
-                    {{--  {{ $datas->links() }} --}}
+                    {{ $datas->links() }}
                 </div>
             </div>
         </div>
