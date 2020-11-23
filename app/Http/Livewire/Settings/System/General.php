@@ -51,7 +51,7 @@ class General extends Component
         $env = new DotenvEditor();
 
         $env->changeEnv([
-            'APP_NAME'   =>  $this->site_title,
+            'APP_NAME'   =>  " " . $this->site_title . " ",
             'APP_URL'   => $this->site_url,
             'DB_CONNECTION'   =>  $this->db_conn,
             'DB_HOST'   => $this->db_host,

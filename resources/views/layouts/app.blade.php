@@ -10,21 +10,11 @@
 
     <title>{{ config('app.name') ?? $title }}</title>
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Template CSS -->
-    {{--  <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
+    <link href="{{ mix('css/template.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
     @stack('css')
     <livewire:styles />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('assets/modules/prism/prism.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/css/iziToast.min.css') }}">
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -93,35 +83,9 @@
     </div>
 
     <livewire:scripts />
-    <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/popper.js') }}"></script>
-    <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
-    <script src="{{ asset('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/stisla.js') }}"></script>
-    {{--  <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script> --}}
-    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-    <!-- JS Libraies -->
-    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/prism/prism.js') }}"></script>
-    <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/izitoast/js/iziToast.min.js') }}"></script>
+    <script src="{{ mix ('js/template.js') }}"> </script>
     @stack('js')
-    <script>
-        function UpperCaseFirstLetter(str){
-                return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-            }
-            window.livewire.on('alert', param => {
-            iziToast[param['type']]({title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight'});
-            });
 
-    </script>
-
-    <!-- Template JS File -->
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('js/function.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 
 </html>

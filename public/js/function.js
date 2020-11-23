@@ -11,3 +11,10 @@ function newWindow(link, myname, w, h, features) {
     win = window.open(link, myname, settings);
     win.window.focus();
 }
+
+function UpperCaseFirstLetter(str) {
+    return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+}
+window.livewire.on('alert', param => {
+    iziToast[param['type']]({ title: UpperCaseFirstLetter(param['type']), message: param['message'], position: 'bottomRight' });
+});
