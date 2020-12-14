@@ -1,6 +1,12 @@
 @push('css')
 <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
 @endpush
+@push('button')
+<a class="float-right btn btn-primary" href="{{ route('tambahPeminjaman') }}">
+    <span class="fa fa-plus"></span>
+    {{ __('Tambah data') }}
+</a>
+@endpush
 <div class="mt-4 row">
     <div class="col-12">
         <div class="card">
@@ -75,26 +81,30 @@
                         </thead>
                         <tbody align="center">
                             @forelse ($datas as $data)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ date('d-m-Y',strtotime($data->tgl_pinjam)) }}</td>
-                                <td>{{ date('d-m-Y',strtotime($data->tgl_kembali)) }}</td>
-                                <td>{{ $data->KodeAnggota }} <br /> {{ $data->anggota->nama }}</td>
-                                <td>{{ $data->daftarPustaka->kodepustaka }} <br />
-                                    {{ $data->daftarPustaka->dataPustaka->judul }}</td>
-                                <td>{{ $data->keterangan }}</td>
-                                <td>{!! $data->telat() !!}</td>
-                                <td>
-                                    <a href="" class="btn btn-success btn-sm" data-toggle="tooltip"
-                                        data-placement="bottom" title="" data-original-title="Kembalikan sekarang"><span
-                                            class=" fa fa-exchange-alt"></span></a>
-                                </td>
-                                <td>
-                                    <a href="javascript:" class="btn btn-success btn-sm" data-toggle="modal"
-                                        data-target="#modalPerpanjangPinjam" wire:click="perpanjang({{ $data->id }})"
-                                        data-placement="bottom" title="" data-original-title="Perpanjangan"><span
-                                            class="fa fa-plus"></span></a>
-                                </td>
+                            <tr @if($data->tgl_kembali < date('Y-m-d')) style="color:red" @endif>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ date('d-m-Y',strtotime($data->tgl_pinjam)) }}</td>
+                                    <td>{{ date('d-m-Y',strtotime($data->tgl_kembali)) }}</td>
+                                    <td>{{ $data->KodeAnggota }} <br /> {{ $data->anggota->nama }}</td>
+                                    <td>{{ $data->daftarPustaka->kodepustaka }} <br />
+                                        {{ $data->daftarPustaka->dataPustaka->judul }}</td>
+                                    <td>{{ $data->keterangan }}</td>
+                                    <td>{!! $data->telat() !!}</td>
+                                    <td>
+                                        <a href="" class="btn btn-success btn-sm" data-toggle="tooltip"
+                                            data-placement="bottom" title=""
+                                            data-original-title="Kembalikan sekarang"><span
+                                                class=" fa fa-exchange-alt"></span></a>
+                                    </td>
+                                    <td>
+                                        <span data-toggle="tooltip" data-placement="bottom" title=""
+                                            data-original-title="Perpanjangan">
+                                            <a href="javascript:" class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#modalPerpanjangPinjam"
+                                                wire:click="perpanjang({{ $data->id }})"><span
+                                                    class="fa fa-plus"></span></a>
+                                        </span>
+                                    </td>
                             </tr>
                             @empty
                             <tr>

@@ -31,6 +31,10 @@
             <a class="nav-link" href="{{ route('penulis.index') }}"><i class="fa fa-user-edit"></i>
                 <span>Penulis</span></a>
         </li>
+        <li class="{{ set_active('anggota.index') }}">
+            <a class="nav-link" href="{{ route('anggota.index') }}"><i class="fa fa-user"></i>
+                <span>{{ __('Anggota') }}</span></a>
+        </li>
         <li class="menu-header">Pustaka</li>
         <li class="dropdown {{ set_active(['pustaka.index','pustaka.create']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-book-open"></i>
