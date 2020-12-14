@@ -5,6 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                @include('pinjam.modal.modal-perpanjang-pinjam')
                 <div class="float-left" wire:ignore>
                     <select class="form-control select2" wire:model="kriteria" name="kriteria" id="kriteria"
                         data-minimum-results-for-search="Infinity">
@@ -89,7 +90,8 @@
                                             class=" fa fa-exchange-alt"></span></a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-success btn-sm" data-toggle="tooltip"
+                                    <a href="javascript:" class="btn btn-success btn-sm" data-toggle="modal"
+                                        data-target="#modalPerpanjangPinjam" wire:click="perpanjang({{ $data->id }})"
                                         data-placement="bottom" title="" data-original-title="Perpanjangan"><span
                                             class="fa fa-plus"></span></a>
                                 </td>
@@ -119,6 +121,9 @@
         })
         $(window).resize(function() {
             $('.select2').css('width', "100%");
+        });
+        window.livewire.on('updatedWaktuPeminjaman', () => {
+            $('#modalPerpanjangPinjam').modal('hide');
         });
     });
 </script>
