@@ -32,7 +32,7 @@
                 <span>Penulis</span></a>
         </li>
         <li class="{{ set_active('anggota.index') }}">
-            <a class="nav-link" href="{{ route('anggota.index') }}"><i class="fa fa-user"></i>
+            <a class="nav-link" href="{{ route('anggota.index') }}"><i class="fa fa-users"></i>
                 <span>{{ __('Anggota') }}</span></a>
         </li>
         <li class="menu-header">Pustaka</li>
