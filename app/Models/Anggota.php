@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use function PHPUnit\Framework\isTrue;
 use Illuminate\Database\Eloquent\Model;
 
-use function PHPUnit\Framework\isTrue;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Anggota extends Model
 {
@@ -30,7 +31,12 @@ class Anggota extends Model
 
     public function getPicture()
     {
-        return $this->profile_photo_path ?? url('assets/img/avatar/avatar-1.png');
+        return $this->photo ? asset('storage/' . $this->photo) : $this->defaultProfilePhotoUrl();
+    }
+
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nama) . '&color=7F9CF5&background=EBF4FF';
     }
 
     public function getStatus()

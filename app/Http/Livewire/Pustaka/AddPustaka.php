@@ -10,10 +10,7 @@ use Livewire\Component;
 use App\Models\Penerbit;
 use App\Models\Pustaka;
 use Exception;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 
 class AddPustaka extends Component
 {

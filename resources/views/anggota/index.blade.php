@@ -1,5 +1,5 @@
 @push('button')
-<a href="{{ route('anggota.form') }}" class="float-right btn btn-primary" id="btnTambahData">
+<a href="{{ route('anggota.form',['job' => 'siswa']) }}" class="float-right btn btn-primary" id="btnTambahData">
     {{ __('Tambah data') }}
 </a>
 <a href="" class="float-right btn btn-secondary">Cetak</a>
@@ -30,6 +30,7 @@
                 <thead align="center">
                     <tr>
                         <th class="pt-2 text-center">#</th>
+                        <th>{{ __('Noregistri') }}</th>
                         <th>{{ __('Nama') }}</th>
                         <th>{{ __('Email') }}</th>
                         <th>{{ __('Pekerjaan') }}</th>
@@ -43,6 +44,7 @@
                     @forelse ($datas as $data => $dat)
                     <tr>
                         <td>{{$data + $datas->firstItem() }}</td>
+                        <td>{{$dat->noregistrasi }}</td>
                         <td>
                             <div class="accordion-header" role="button" data-toggle="collapse"
                                 data-target="#panel-body-1" aria-expanded="true">

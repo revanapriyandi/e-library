@@ -1,5 +1,6 @@
 <div>
-    <x-modal wire:ignore.self tabindex="-1" role="dialog" class="modal" id="modalForm">
+    <x-modal wire:ignore.self data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" class="modal"
+        id="modalForm">
         @slot('close')
         wire:click="cancel()"
         @endslot
