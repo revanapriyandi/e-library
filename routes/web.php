@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pustaka/pustaka-tambah-&-hapus-pustaka/{id}', App\Http\Livewire\Pustaka\Adddel::class)->name('pustaka.adddel');
 
     Route::get('/anggota-pustaka', App\Http\Livewire\Anggota\Index::class)->name('anggota.index');
-    Route::get('/anggota-pustaka/add-anggota', App\Http\Livewire\Anggota\AddAnggota::class)->name('anggota.form');
+    Route::get('/anggota-pustaka/add-anggota', App\Http\Livewire\Anggota\AddAnggota::class)->name('anggota.form')->middleware('isJob');
 
     Route::get('/peminjaman', App\Http\Livewire\Pinjam\Peminjaman::class)->name('pinjam.peminjaman');
     Route::get('/tambah-peminjaman', App\Http\Livewire\Pinjam\AddPeminjaman::class)->name('tambahPeminjaman');

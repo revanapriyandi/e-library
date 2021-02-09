@@ -25,24 +25,31 @@
                                     placeholder="{{ __('Hp') }}" required wire:model="hp" />
                                 <x-input-error for="hp" />
                             </div>
-                            @if (request()->job == 'siswa')
-                            <div class="form-group">
-                                <x-label for="kelas" required>{{ __('Kelas') }}</x-label>
-                                <select name="kelas" id="kelas" wire:model="kelas" class="form-control" required>
-                                    <option value="">XXXX</option>
-                                </select>
-                                <x-input-error for="kelas" />
+                            <div wire:ignore>
+                                @if (request()->job == 'siswa')
+                                <div class="form-group">
+                                    <x-label for="kelas" required>{{ __('Kelas') }}</x-label>
+                                    <select name="kelas" id="kelas" wire:model="kelas" class="form-control" required>
+                                        <option value="">{{ __('Silahkan Pulih Kelas') }}</option>
+                                        @forelse ($dataKelas as $dk)
+                                        <option value="{{ $dk->id }}">{{ $dk->name }}</option>
+                                        @empty
+                                        <option value="#">{{ __('Tidak ada data') }}</option>
+                                        @endforelse
+                                    </select>
+                                    <x-input-error for="kelas" />
+                                </div>
+                                @endif
+                                @if (request()->job != 'nonSekolah')
+                                <div class="form-group">
+                                    <x-label for="institusi" required>{{ __('Institusi') }}</x-label>
+                                    <x-input type="text"
+                                        class="form-control {{ $errors->has('institusi') ? ' is-invalid' : '' }}"
+                                        placeholder="{{ __('institusi') }}" required wire:model="institusi" />
+                                    <x-input-error for="institusi" />
+                                </div>
+                                @endif
                             </div>
-                            @endif
-                            @if (request()->job != 'nonSekolah')
-                            <div class="form-group">
-                                <x-label for="institusi" required>{{ __('Institusi') }}</x-label>
-                                <x-input type="text"
-                                    class="form-control {{ $errors->has('institusi') ? ' is-invalid' : '' }}"
-                                    placeholder="{{ __('institusi') }}" required wire:model="institusi" />
-                                <x-input-error for="institusi" />
-                            </div>
-                            @endif
                             <div class="form-group">
                                 <x-label for="telpon">{{ __('Telpon (Opsional)') }}</x-label>
                                 <x-input type="text"
@@ -104,7 +111,9 @@
                     </div>
                 </div>
             </div>
-            <x-button class="btn btn-primary btn-block" type="submit">{{ __('Simpan') }}</x-button>
+            <x-button class="btn btn-primary btn-block" type="submit">
+                {{ __('Simpan') }}</x-button>
         </form>
+
     </div>
 </section>

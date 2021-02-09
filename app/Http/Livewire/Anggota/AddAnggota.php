@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Anggota;
 
 use Exception;
+use App\Models\Kelas;
 use App\Models\Anggota;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,7 +15,7 @@ class AddAnggota extends Component
     public $nama;
     public $email;
     public $hp;
-    public $kelas = null;
+    public $kelas;
     public $institusi;
     public $telpon;
     public $kodepos;
@@ -22,29 +23,30 @@ class AddAnggota extends Component
     public $keterangan;
 
     public $photo;
+    public $job;
 
-    protected $rules = [
-        'nama' => 'required|string|max:100',
-        'email' => 'nullable|email|max:100',
-        'hp' => 'required|string',
-        'telpon' => 'max:30',
-        'institusi' => 'string|max:100',
-        'keterangan' => 'string|max:255',
-        'kelas' => 'max:20',
-        'kodepos' => 'max:20',
-        'alamat' => 'required'
-    ];
-
-    protected $messages = [
-        'nama.required' => 'Nama harus diisi.',
-        'email.required' => 'Email harus diisi.',
-        'email.email' => 'Format email tidak benar.',
-        'hp.required' => 'Nomor Hp harus diisi.',
-    ];
-
-    public function updated($propertyName)
+    public function mount()
     {
-        $this->validateOnly($propertyName);
+        $this->job = request()->job;
+    }
+
+
+    public function updated($field)
+    {
+
+        $this->validateOnly(
+            $field,
+            [
+                'nama' => 'required|string|min:2|max:100',
+                'email' => 'nullable|email|max:100',
+                'hp' => 'required|string',
+                'telpon' => 'nullable|max:30',
+                'institusi' => 'required|string|max:100',
+                'kelas' => 'required',
+                'kodepos' => 'required|max:20',
+                'alamat' => 'required'
+            ]
+        );
     }
 
     public function resetInputFields()
@@ -63,7 +65,17 @@ class AddAnggota extends Component
 
     public function store()
     {
-        $this->validate(['photo' => $this->photo ? 'image|mimes:png,jpeg,jpg' : '',]);
+        $this->validate([
+            'nama' => 'required|string|min:2|max:100',
+            'email' => 'required|email|max:100',
+            'hp' => 'required|string',
+            'telpon' => 'nullable|max:30',
+            'institusi' => 'required|string|max:100',
+            'kelas' => $this->photo == 'siswa' ? 'required' : 'nullable',
+            'kodepos' => 'required|max:20',
+            'alamat' => 'required',
+            'photo' => $this->photo ? 'image|mimes:png,jpeg,jpg' : '',
+        ]);
         if ($this->photo) {
             $photos = $this->photo->store('anggota-image', 'public');
         } else {
@@ -80,7 +92,7 @@ class AddAnggota extends Component
             'kodepos' => $this->kodepos,
             'alamat' => $this->alamat,
             'keterangan' => $this->keterangan,
-            'pekerjaan' => request()->job,
+            'pekerjaan' => $this->job,
             'photo' => $photos,
         ]);
         $this->resetInputFields();
@@ -114,9 +126,13 @@ class AddAnggota extends Component
         return $noregistrasi;
     }
 
+
     public function render()
     {
-        return view('anggota.add-anggota')
+
+        return view('anggota.add-anggota', [
+            'dataKelas' => Kelas::where('isAktif', true)->get(),
+        ])
             ->layout('layouts.app', ['header' => 'Anggota Baru']);
     }
 }
