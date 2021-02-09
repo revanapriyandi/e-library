@@ -1,13 +1,16 @@
 <div align="center">
+    
+<h1 align="center">E-Library</h1>
 
-# E-Library
+    
+<p align="center">
+  <img src="https://rsmajenang.cilacapkab.go.id/wp-content/uploads/2020/02/ThinkstockPhotos-859739414.jpg" />
+</p>
 
 > A digital library is a library that has a collection of books mostly in digital format and which can be accessed by computer.
 >
 >
-
 </div>
-
 
 ## 🔍 Installing the dependencies
 ```bash
