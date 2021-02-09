@@ -22,7 +22,7 @@
 > php artisan migrate<br>
 ```
 
-## 🚀 Running the bot
+## 🚀 Running the App
 Regular node:
 ```bash
 > php artisan serve
